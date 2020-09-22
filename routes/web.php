@@ -37,6 +37,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
         Route::get('/people/search','PersonController@search');
         Route::resource('people', 'PersonController');
 
+        //Craf Applications
+
+        Route::get('/applications/search','ApplicationController@search');
+        Route::get('/applications/create/{person}', 'ApplicationController@create');
+        Route::resource('applications', 'ApplicationController');
+
     });
 
 });

@@ -35,13 +35,13 @@
                             </div>
                         @endif
                         @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div><br />
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div><br />
                         @endif
                         @include('sidebar.main')
 
@@ -54,30 +54,30 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-10">
-                    <h2>Lista de Portadores</h2>
-                    <p>Portadores cadastrados no sistema</p>
+                    <h2>Listagem de Solicitações de CRAF</h2>
+
                     @include('flash::message')
                 </div>
                 <div class="col-md-2" style="padding: 10px">
-                    <a href="{{route('admin.people.create')}}"><button class="btn btn-sm btn-success">Criar Novo Portador</button></a>
+                    <a href="{{route('admin.applications.create')}}"><button class="btn btn-sm btn-success">Registrar Nova Solicitação</button></a>
                 </div>
             </div>
 
-                <div class="col-md-12">
+            <div class="col-md-12">
 
-                        <a class="btn btn-sm btn-warning" href="{{route('admin.people.index')}}">Listar todos portadores</a>
-                        <form action="people/search" method="get">
-                            {{ csrf_field() }}
-                            <div class="btn btn-sm btn-info">
-                                <label for="gsearch">Buscar pelo RG:</label>
-                                <input  id= "gsearch" name="search_text" type="text" />
-                                <input type="submit"/>
-                            </div>
+                <a class="btn btn-sm btn-warning" href="{{route('admin.applications.index')}}">Listar todas solicitações</a>
+                <form action="applications/search" method="get">
+                    {{ csrf_field() }}
+                    <div class="btn btn-sm btn-info">
+                        <label for="gsearch">Buscar pelo RG:</label>
+                        <input  id= "gsearch" name="search_text" type="text" />
+                        <input type="submit"/>
+                    </div>
 
-                        </form>
+                </form>
 
 
-                </div>
+            </div>
 
 
 
@@ -91,27 +91,26 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>Nome</th>
+                            <th>NºSEI</th>
                             <th>RG</th>
-                            <th>CPF</th>
+                            <th>CRAF</th>
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($people as $person)
+                        @foreach($applications as $application)
                             <tr>
 
-                                <td>{{$person->fullName()}} </td>
+                                <td>{{$application->sei}} </td>
                                 <td>{{$person->rg}}</td>
-                                <td>{{$person->cpf}}</td>
+                                <td>{{$application->craf}}</td>
 
                                 <td>
 
 
-                                    <a href="{{route('admin.people.show', $person->id)}}"><button class="btn btn-sm btn-success">Visualizar</button></a>
-                                    <a href="{{url('admin/apllications/create', $person->id)}}"><button class="btn btn-sm btn-secondary">Abrir Solicitação</button></a>
+                                    <a href=""><button class="btn btn-sm btn-success">Visualizar</button></a>
                                     <a href=""><button class="btn btn-sm btn-warning">Editar</button></a>
-                                        <a href=""><button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Deseja Excluir definitivamente?');">Delete</button></a>
+{{--                                    <a href=""><button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Deseja Excluir definitivamente?');">Delete</button></a>--}}
 
 
                                 </td>
@@ -122,7 +121,7 @@
 
                         </tbody>
                     </table>
-                    {{$people->links()}}
+                    {{$applications->links()}}
 
                 </div>
 
@@ -133,4 +132,5 @@
         </div>
     </div>
 @endsection
+
 
