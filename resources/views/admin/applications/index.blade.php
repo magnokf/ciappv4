@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container">
+
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
@@ -58,9 +59,7 @@
 
                     @include('flash::message')
                 </div>
-                <div class="col-md-2" style="padding: 10px">
-                    <a href="{{route('admin.applications.create')}}"><button class="btn btn-sm btn-success">Registrar Nova Solicitação</button></a>
-                </div>
+
             </div>
 
             <div class="col-md-12">
@@ -102,7 +101,7 @@
                             <tr>
 
                                 <td>{{$application->sei}} </td>
-                                <td>{{$person->rg}}</td>
+                                <td>{{$application->person_id}}</td>
                                 <td>{{$application->craf}}</td>
 
                                 <td>

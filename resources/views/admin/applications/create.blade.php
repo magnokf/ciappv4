@@ -2,6 +2,7 @@
 
 @section('content')
 
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -29,35 +30,20 @@
                     </div>
                 @endif
                 <div class="card">
-                    <div class="card-header">{{ __('Register') }} Nova Solicitação - CRAF</div>
+                    <div class="card-header">{{ __('Register') }} Nova Solicitação - CRAF ( {{$person->fullName()}} {{$person->cpf}} )</div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('admin.applications.store') }}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group row">
-                                <label for="person_id" class="col-md-4 col-form-label text-md-right">Solicitante</label>
+
 
                                 <div class="col-md-6">
 
-{{--                                    <input id="person_id" type="text" class="form-control @error('person_id') is-invalid @enderror" name="person_id" value="{{ old('person_id') ?? $person->id }}" required autocomplete="person_id" autofocus>--}}
 
-                                    <select name="person_id" >
-                                        <option value="" selected>Selecione o Solicitante</option>
-                                        @foreach($people as $person)
-                                            @if(!empty($selected))
-                                                <option value="{{ $person->id }}" {{ ($person->id === $selected->id ? 'selected' : '') }}>{{ $person->first_name }} ({{ $user->cpf }})</option>
-                                            @else
-                                                <option value="{{ $person->id }}">{{ $person->first_name }} ({{ $person->cpf }})</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                    @if(!empty($selected->id))
-                                        <p style="margin-top: 4px;">
-                                            <a href="{{route('admin.people.create')}}" class="text-orange icon-link" style="font-size: .8em;" target="_blank">Acessar
-                                                Cadastro</a>
-                                        </p>
-                                    @endif
+                                    <input id="person_id" type="hidden" class="form-control @error('person_id') is-invalid @enderror" name="person_id" value="{{ old('person_id') ?? $person->id }}" required autocomplete="person_id" autofocus>
+
 
                                     @error('person_id')
                                     <span class="invalid-feedback" role="alert">
@@ -97,9 +83,8 @@
                                     </span>
                                     @enderror
                                 </div>
-
-
                             </div>
+                            @if($application->report == 1))
                             <div class="form-group row">
 
                                 <label for="nota_def_cbmerj" class="col-md-4 col-form-label text-md-right">Nota de Deferimento/Indeferimento</label>
@@ -163,6 +148,7 @@
                                 </div>
 
                             </div>
+                            @endif
 
 
 

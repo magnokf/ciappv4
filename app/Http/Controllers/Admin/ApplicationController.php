@@ -20,6 +20,7 @@ class ApplicationController extends Controller
      * @var Application
      */
     private $Application;
+    protected $Person;
 
 
     public function __construct()
@@ -36,10 +37,10 @@ class ApplicationController extends Controller
     public function index(Application $applications)
     {
         $users = Auth::user();
-        $people = Person::all();
-        $applications = Application::orderBy('person_id', 'asc')->paginate(5);;
+
+        $applications = Application::orderBy('person_id', 'asc')->paginate(5);
         return view('admin.applications.index', [
-            'people'=>$people,
+
             'applications'=>$applications,
             'users'=>$users,
         ]);
@@ -52,10 +53,11 @@ class ApplicationController extends Controller
      */
     public function create(Application $application)
     {
-        $people = Person::all();
-        return view('admin.applications.create', [
-            'people'=>$people
-        ]);
+        $id = base64_decode(request()->get('person'));
+
+        $person = Person::findOrFail($id);
+        $applicant = $person->applications()->get();
+        return view('admin.applications.create', compact('person','application'));
     }
 
     /**
@@ -66,7 +68,17 @@ class ApplicationController extends Controller
      */
     public function store(ApplicationRequest $request)
     {
-        //
+        $createApplication = Application::create($request->all());
+        $person_id = $request->get('person_id');
+        $createApplication->save();
+
+        flash("Solicitação criada com sucesso")->success();
+        $person = Person::all()->firstWhere('id',$person_id);
+        $applications = Application::all()->where('person_id', $person_id);
+
+
+        return view('admin.applications.show', compact('person','applications'));
+
     }
 
     /**
@@ -75,9 +87,15 @@ class ApplicationController extends Controller
      * @param  \App\Application  $application
      * @return \Illuminate\Http\Response
      */
-    public function show(Application $application)
+    public function show($id)
     {
-        //
+
+
+        $application = Application::find($id);
+
+
+        return view('admin.applications.show', compact('application'));
+
     }
 
     /**
@@ -112,5 +130,13 @@ class ApplicationController extends Controller
     public function destroy(Application $application)
     {
         //
+    }
+
+    public function search()
+    {
+        $query=request('search_text');
+        $applications = Application::where('person_id', 'LIKE', '%' . $query . '%')->paginate(5);
+        $person = Person::all();
+        return view('admin.applications.index',compact('applications','person'));
     }
 }

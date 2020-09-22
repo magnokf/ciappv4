@@ -30,7 +30,7 @@ class Person extends Model
 
     public function getDateOfBirthAttribute($value)
     {
-        return date('d/m/Y', strtotime($value));
+        return $value ?  date('d/m/Y', strtotime($value)) : 'Sem informação';
     }
 
     public function getEmailVerifiedAtAttribute($value)
@@ -41,5 +41,9 @@ class Person extends Model
     public function fullName(): string
     {
         return "{$this->first_name} {$this->last_name}";
+    }
+    public function applications()
+    {
+        return $this->hasMany(Application::class, 'person_id', 'id');
     }
 }

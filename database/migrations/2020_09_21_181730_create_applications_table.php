@@ -18,7 +18,7 @@ class CreateApplicationsTable extends Migration
             $table->id();
             $table->integer('ident_key')->nullable();
             $table->integer('ident_ano')->nullable();
-            $table->foreignId('person_id')->constrained('people');
+            $table->integer('person_id');
             $table->string('sei');
             $table->integer('report')->default(0);
             $table->string('nota_def_cbmerj')->nullable();

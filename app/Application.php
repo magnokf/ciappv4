@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Application extends Model
 {
-    protected $guarded = ['id','person_id'];
+    protected $guarded = ['id'];
     protected $fillable = [
+        'person_id',
         'ident_key',
         'ident_ano',
         'sei',
@@ -29,6 +30,11 @@ class Application extends Model
     public function serialApplication(): string
     {
         return "{$this->ident_key} / {$this->ident_ano}";
+    }
+
+    public function applicant()
+    {
+        return $this->belongsTo(Person::class, 'person_id', 'id');
     }
 
 }

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Application;
+use App\Person;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -14,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+
     }
 
     /**
@@ -25,5 +27,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
+//        $person = Person::all();
+//        $applications = Application::all();
+//        view()->share('applications', $applications, 'person',$person);
     }
 }

@@ -108,8 +108,8 @@
                                 <td>
 
 
-                                    <a href="{{route('admin.people.show', $person->id)}}"><button class="btn btn-sm btn-success">Visualizar</button></a>
-                                    <a href="{{url('admin/apllications/create', $person->id)}}"><button class="btn btn-sm btn-secondary">Abrir Solicitação</button></a>
+                                    <a href="{{route('admin.people.show', ['person' =>$person->id])}}"><button class="btn btn-sm btn-success">Visualizar</button></a>
+                                    <a href="{{route('admin.applications.create', ['person' => base64_encode($person->id) ])}}"><button class="btn btn-sm btn-secondary">Abrir Solicitação</button></a>
                                     <a href=""><button class="btn btn-sm btn-warning">Editar</button></a>
                                         <a href=""><button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Deseja Excluir definitivamente?');">Delete</button></a>
 

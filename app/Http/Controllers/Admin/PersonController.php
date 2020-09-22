@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Application;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StorePerson as PersonRequest;
 use App\Person;
@@ -44,14 +45,17 @@ class PersonController extends Controller
      * @param Person $people
      * @return \Illuminate\Http\Response
      */
-    public function index(Person $people)
+    public function index(Person $person)
     {
-        //
+
+        $applications = $person->applications()->get();
+
         $users = Auth::user();
         $people = Person::orderBy('rg', 'asc')->paginate(5);
         return view('admin.people.index', [
             'people' => $people,
             'users'=> $users,
+            'applications'=>$applications
         ]);
     }
 
@@ -91,7 +95,12 @@ class PersonController extends Controller
     public function show($id)
     {
         $person = $this->Person->find($id);
-       return view('admin.people.show', compact('person'));
+        $applications = Application::orderBy('id', 'asc')->where('person_id',$person->id)->paginate(3);
+
+       return view('admin.people.show', [
+           'person'=>$person,
+           'applications'=>$applications,
+       ]);
     }
 
     /**
@@ -130,4 +139,6 @@ class PersonController extends Controller
     {
         //
     }
+
+
 }
