@@ -24,8 +24,8 @@ class Application extends Model
         'closed'
 
     ];
-    public function getDateAttribute($value) {
-        return Carbon::parse($value)->format('d-m-Y');
+    public function getCreatedAtAttribute($value) {
+        return Carbon::parse($value)->format('d-m-Y H:i:s');
     }
     public function serialApplication(): string
     {
@@ -35,6 +35,19 @@ class Application extends Model
     public function applicant()
     {
         return $this->belongsTo(Person::class, 'person_id', 'id');
+    }
+
+    public function getReportAttribute($value)
+    {
+        if ($value == 0){
+            echo '<b style="color: blue">EM ANÁLISE</b>';
+        }
+        if ($value == 1){
+            echo '<b style="color: green">DEFERIDO</b>';
+        }
+        if ($value == 2){
+            echo '<b style="color: red">INDEFERIDO</b>';
+        }
     }
 
 }

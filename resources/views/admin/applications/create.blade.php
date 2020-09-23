@@ -71,17 +71,11 @@
                                 <label for="report" class="col-md-4 col-form-label text-md-right">Status de Análise</label>
 
                                 <div class="col-md-6">
-                                    <select id="report" type="number" class="form-control @error('report') is-invalid @enderror" name="report" required autocomplete="report" autofocus>
+                                    <select id="report" type="number" class="form-control @error('report') is-invalid @enderror" name="report" required autofocus>
                                         <option value="0">Em Análise</option>
                                         <option value="1">Deferido</option>
                                         <option value="2">Indeferido</option>
                                     </select>
-
-                                    @error('report')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
                                 </div>
                             </div>
                             @if($application->report == 1))

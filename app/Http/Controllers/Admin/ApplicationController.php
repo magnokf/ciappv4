@@ -20,7 +20,10 @@ class ApplicationController extends Controller
      * @var Application
      */
     private $Application;
-    protected $Person;
+    /**
+     * @var
+     */
+
 
 
     public function __construct()
@@ -90,13 +93,13 @@ class ApplicationController extends Controller
     public function show($id)
     {
 
-
         $application = Application::find($id);
+        $person = Person::where('id',$application->person_id)->first() ;
 
-
-        return view('admin.applications.show', compact('application'));
+        return view('admin.applications.show_app', compact('application', 'person'));
 
     }
+
 
     /**
      * Show the form for editing the specified resource.

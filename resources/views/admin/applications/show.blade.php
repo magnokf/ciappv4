@@ -62,7 +62,7 @@
                 @endif
                 </tbody>
             </table>
-            {{$applications->links()}}
+
 
 
 

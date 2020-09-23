@@ -55,7 +55,7 @@
                     <td>{{$application->created_at}}</td>
                     <td>{{$application->sei}}</td>
                     <td>{{$application->report}}</td>
-                    <td><a href="" class="btn btn-sm btn-dark">Visualizar</a> </td>
+                    <td><a href="{{route('admin.applications.show', $application->id)}}" class="btn btn-sm btn-dark">Visualizar</a> </td>
 
                 </tr>
                     @endforeach
