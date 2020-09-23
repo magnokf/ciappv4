@@ -69,9 +69,8 @@
                         <form action="people/search" method="get">
                             {{ csrf_field() }}
                             <div class="btn btn-sm btn-info">
-                                <label for="gsearch">Buscar pelo RG:</label>
-                                <input  id= "gsearch" name="search_text" type="text" />
-                                <input type="submit"/>
+                                <label for="gsearch">Filtar pelo RG:</label>
+                                <input  id= "gsearch" name="search_text" type="text" type="submit"/>
                             </div>
 
                         </form>
@@ -108,8 +107,8 @@
                                 <td>
 
 
-                                    <a href="{{route('admin.people.show', ['person' =>$person->id])}}"><button class="btn btn-sm btn-success">Visualizar</button></a>
-                                    <a href="{{route('admin.applications.create', ['person' => base64_encode($person->id) ])}}"><button class="btn btn-sm btn-secondary">Abrir Solicitação</button></a>
+                                    <a href="{{route('admin.people.show', ['person' =>$person->id])}}"><button class="btn btn-sm btn-success">Visualizar Atividades</button></a>
+                                    <a href="{{route('admin.applications.create', ['person' => base64_encode($person->id) ])}}"><button class="btn btn-sm btn-secondary">Abrir Solicitação de CRAF</button></a>
                                     <a href=""><button class="btn btn-sm btn-warning">Editar</button></a>
                                         <a href=""><button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Deseja Excluir definitivamente?');">Delete</button></a>
 

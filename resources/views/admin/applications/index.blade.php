@@ -64,16 +64,7 @@
 
             <div class="col-md-12">
 
-                <a class="btn btn-sm btn-warning" href="{{route('admin.applications.index')}}">Listar todas solicitações</a>
-                <form action="applications/search" method="get">
-                    {{ csrf_field() }}
-                    <div class="btn btn-sm btn-info">
-                        <label for="gsearch">Buscar pelo RG:</label>
-                        <input  id= "gsearch" name="search_text" type="text" />
-                        <input type="submit"/>
-                    </div>
 
-                </form>
 
 
             </div>
@@ -90,6 +81,7 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
+                            <th>Serial CIAPP</th>
                             <th>NºSEI</th>
                             <th>RG</th>
                             <th>CRAF</th>
@@ -100,16 +92,16 @@
                         @foreach($applications as $application)
                             <tr>
 
-                                <td>{{$application->sei}} </td>
+                                <td>CIAPP {{$application->ident_key}}/{{$application->ident_ano}} </td>
+                                <td>SEI-27{{$application->sei}} </td>
                                 <td>{{$application->person_id}}</td>
                                 <td>{{$application->craf}}</td>
 
                                 <td>
 
 
-                                    <a href=""><button class="btn btn-sm btn-success">Visualizar</button></a>
-                                    <a href=""><button class="btn btn-sm btn-warning">Editar</button></a>
-{{--                                    <a href=""><button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Deseja Excluir definitivamente?');">Delete</button></a>--}}
+                                    <a href="{{route('admin.applications.show', $application->id)}}"><button class="btn btn-sm btn-success">Visualizar</button></a>
+
 
 
                                 </td>

@@ -95,7 +95,7 @@ class PersonController extends Controller
     public function show($id)
     {
         $person = $this->Person->find($id);
-        $applications = Application::orderBy('id', 'asc')->where('person_id',$person->id)->paginate(3);
+        $applications = Application::orderBy('id', 'asc')->where('person_id',$person->rg)->paginate(3);
 
        return view('admin.people.show', [
            'person'=>$person,

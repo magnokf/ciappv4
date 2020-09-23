@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Person;
+use Symfony\Component\Console\Input\Input;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,12 +36,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
 
         //Person//
 
-        Route::get('/people/search','PersonController@search');
+        Route::any('/people/search','PersonController@search');
         Route::resource('people', 'PersonController');
 
         //Craf Applications
 
-        Route::get('/applications/search','ApplicationController@search');
+        Route::any('applications/search','ApplicationController@search');
         Route::resource('applications', 'ApplicationController');
 
     });

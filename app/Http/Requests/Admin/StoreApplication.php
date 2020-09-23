@@ -25,8 +25,8 @@ class StoreApplication extends FormRequest
     public function rules()
     {
         $this->rules = [
-            'sei' => ['required', 'string', 'max:16', 'unique:applications'],
-            'craf'=> ['nullable','digits:11','unique:applications'],
+            'sei' => ['required', 'min:16', 'max:16' ,'unique:applications'],
+            'craf'=> ['nullable', 'digits:11', 'unique:applications'],
 
         ];
         return $this->rules;

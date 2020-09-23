@@ -54,11 +54,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-10">
-                    <h2>Lista de Usuários</h2>
-                    <p>Lista de usuários cadastrados no sistema</p>
+                    <h2>Gestão do Usuário</h2>
+                    @if(auth()->user()->admin == 1) - <p>Listagem de usuários cadastrados no sistema</p> @endif
+
                 </div>
                 <div class="col-md-2" style="padding: 10px">
-                    <a href="{{route('admin.users.create')}}"><button class="btn btn-success">Criar Novo Usuário</button></a>
+                    @if(auth()->user()->admin == 1) - <a href="{{route('admin.users.create')}}"><button class="btn btn-success">Criar Novo Usuário</button></a> @endif
+
                 </div>
             </div>
             <div class="row">

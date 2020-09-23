@@ -42,7 +42,7 @@
                                 <div class="col-md-6">
 
 
-                                    <input id="person_id" type="hidden" class="form-control @error('person_id') is-invalid @enderror" name="person_id" value="{{ old('person_id') ?? $person->id }}" required autocomplete="person_id" autofocus>
+                                    <input id="person_id" type="hidden" class="form-control @error('person_id') is-invalid @enderror" name="person_id" value="{{ old('person_id') ?? $person->rg }}" required autocomplete="person_id" autofocus>
 
 
                                     @error('person_id')
@@ -54,10 +54,10 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="sei" class="col-md-4 col-form-label text-md-right">SEI nº</label>
+                                <label for="sei" class="col-md-4 col-form-label text-md-right">SEI-27</label>
 
                                 <div class="col-md-6">
-                                    <input id="sei" type="text" class="form-control @error('sei') is-invalid @enderror" name="sei" value="{{ old('sei') }}" required autocomplete="sei" autofocus>
+                                    <input id="sei" type="text" class="form-control @error('sei') is-invalid @enderror" name="sei" value="{{ old('sei') }}" required autocomplete="sei" data-mask="0000/000000/0000" maxlength="16" autofocus>
 
                                     @error('sei')
                                     <span class="invalid-feedback" role="alert">
@@ -68,17 +68,21 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="report" class="col-md-4 col-form-label text-md-right">Status de Análise</label>
+
 
                                 <div class="col-md-6">
-                                    <select id="report" type="number" class="form-control @error('report') is-invalid @enderror" name="report" required autofocus>
-                                        <option value="0">Em Análise</option>
-                                        <option value="1">Deferido</option>
-                                        <option value="2">Indeferido</option>
-                                    </select>
+                                    <input id="report" type="hidden" name="report" value="0"autofocus>
+{{--                                    <select id="report" type="number" class="form-control @error('report') is-invalid @enderror" name="report" required autofocus>--}}
+{{--                                        <option value="0">Em Análise</option>--}}
+{{--                                        <option value="1">Deferido</option>--}}
+{{--                                        <option value="2">Indeferido</option>--}}
+{{--                                    </select>--}}
                                 </div>
+
                             </div>
-                            @if($application->report == 1))
+                            @if($application->report == 1)
+
+
                             <div class="form-group row">
 
                                 <label for="nota_def_cbmerj" class="col-md-4 col-form-label text-md-right">Nota de Deferimento/Indeferimento</label>

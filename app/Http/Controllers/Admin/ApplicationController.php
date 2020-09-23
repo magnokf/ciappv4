@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Person;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\Console\Input\Input;
 
 
 /**
@@ -40,11 +41,15 @@ class ApplicationController extends Controller
     public function index(Application $applications)
     {
         $users = Auth::user();
-
         $applications = Application::orderBy('person_id', 'asc')->paginate(5);
+        foreach ($applications as $application){
+            $person = Person::where('rg',$application->person_id)->first() ;
+        }
+
         return view('admin.applications.index', [
 
             'applications'=>$applications,
+            'person'=>$person,
             'users'=>$users,
         ]);
     }
@@ -76,7 +81,7 @@ class ApplicationController extends Controller
         $createApplication->save();
 
         flash("Solicitação criada com sucesso")->success();
-        $person = Person::all()->firstWhere('id',$person_id);
+        $person = Person::firstWhere('rg',$person_id);
         $applications = Application::all()->where('person_id', $person_id);
 
 
@@ -94,7 +99,7 @@ class ApplicationController extends Controller
     {
 
         $application = Application::find($id);
-        $person = Person::where('id',$application->person_id)->first() ;
+        $person = Person::where('rg',$application->person_id)->first() ;
 
         return view('admin.applications.show_app', compact('application', 'person'));
 
@@ -135,11 +140,5 @@ class ApplicationController extends Controller
         //
     }
 
-    public function search()
-    {
-        $query=request('search_text');
-        $applications = Application::where('person_id', 'LIKE', '%' . $query . '%')->paginate(5);
-        $person = Person::all();
-        return view('admin.applications.index',compact('applications','person'));
-    }
+
 }
