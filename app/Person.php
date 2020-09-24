@@ -21,7 +21,8 @@ class Person extends Model
         'neighborhood',
         'city',
         'state',
-        'zipcode'
+        'zipcode',
+        'posto'
 
     ];
     protected $casts = [

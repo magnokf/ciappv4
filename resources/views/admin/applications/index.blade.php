@@ -101,6 +101,7 @@
 
 
                                     <a href="{{route('admin.applications.show', $application->id)}}"><button class="btn btn-sm btn-success">Visualizar</button></a>
+                                    <a href="{{route('admin.applications.edit', $application->id)}}"><button class="btn btn-sm btn-primary">Atualizar</button></a>
 
 
 

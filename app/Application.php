@@ -37,18 +37,7 @@ class Application extends Model
         return $this->belongsTo(Person::class, 'person_id', 'id');
     }
 
-    public function getReportAttribute($value)
-    {
-        if ($value == 0){
-            echo '<b style="color: blue">EM ANÁLISE</b>';
-        }
-        if ($value == 1){
-            echo '<b style="color: green">DEFERIDO</b>';
-        }
-        if ($value == 2){
-            echo '<b style="color: red">INDEFERIDO</b>';
-        }
-    }
+
 
 
 

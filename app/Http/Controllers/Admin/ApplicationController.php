@@ -82,10 +82,14 @@ class ApplicationController extends Controller
 
         flash("Solicitação criada com sucesso")->success();
         $person = Person::firstWhere('rg',$person_id);
-        $applications = Application::all()->where('person_id', $person_id);
+        $applications = Application::where('person_id', $person_id)->paginate(5);
 
 
-        return view('admin.applications.show', compact('person','applications'));
+
+        return redirect()->route('admin.applications.index',[
+            'person'=>$person,
+            'applications'=>$applications
+        ]);
 
     }
 
@@ -114,7 +118,8 @@ class ApplicationController extends Controller
      */
     public function edit(Application $application)
     {
-        //
+        $person = Person::where('rg',$application->person_id)->first() ;
+        return view('admin.applications.edit', compact('application', 'person'));
     }
 
     /**
@@ -124,9 +129,19 @@ class ApplicationController extends Controller
      * @param  \App\Application  $application
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Application $application)
+    public function update(ApplicationRequest $request, Application $application)
     {
-        //
+        $user = Auth::user();
+        //$application = Application::find($id);
+        $application->update($request->validated());
+        /*$application->report = $request->get('report');
+        $application->nota_def_cbmerj = $request->get('nota_def_cbmerj');
+        $application->nota_sigma_cbmerj = $request->get('nota_sigma_cbmerj');
+        $application->nota_craf_cbmerj = $request->get('nota_craf_cbmerj');*/
+
+        //$application->update($request->all());
+        flash("Solicitação atualizada com sucesso pelo Usuário:")->success();
+        return redirect()->route('admin.applications.index');
     }
 
     /**

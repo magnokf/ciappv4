@@ -20,7 +20,7 @@ class CreateApplicationsTable extends Migration
             $table->integer('ident_ano')->nullable();
             $table->integer('person_id');
             $table->string('sei');
-            $table->integer('report')->default(0);
+            $table->string('report')->default('EM ANALISE');
             $table->string('nota_def_cbmerj')->nullable();
             $table->string('nota_sigma_cbmerj')->nullable();
             $table->string('nota_craf_cbmerj')->nullable();

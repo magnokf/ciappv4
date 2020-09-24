@@ -8,7 +8,11 @@
         Solicitante:  <strong>{{$person->first_name}} {{$person->last_name}} - CPF : {{$person->cpf}} - RG : {{$person->rg}}</strong> <br>
         Protocolo CIAPP:  <strong>{{$application->ident_key}} / {{$application->ident_ano}}</strong><br>
         Requerimento SEI Nº:  <strong>SEI-27{{$application->sei}}</strong><br>
-        Status: {{$application->report}}<br>
+
+        @if($application->report == 'EM ANALISE')Status:<b style="color:  blue">{{$application->report}}</b>@endif
+        @if($application->report == 'DEFERIDO')Status:<b style="color:  forestgreen">{{$application->report}}</b>@endif
+        @if($application->report == 'INDEFERIDO')Status:<b style="color:  red">{{$application->report}}</b>@endif
+                                                                                       <br>
         @if(!$application->nota_def_cbmerj)
 
         @else Nota de Deferimento/Indeferimento :<b>{{$application->nota_def_cbmerj}}</b><br>

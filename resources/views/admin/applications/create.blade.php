@@ -57,7 +57,7 @@
                                 <label for="sei" class="col-md-4 col-form-label text-md-right">SEI-27</label>
 
                                 <div class="col-md-6">
-                                    <input id="sei" type="text" class="form-control @error('sei') is-invalid @enderror" name="sei" value="{{ old('sei') }}" required autocomplete="sei" data-mask="0000/000000/0000" maxlength="16" autofocus>
+                                    <input id="sei" type="text" class="sei form-control @error('sei') is-invalid @enderror" name="sei" value="{{ old('sei') }}" required autocomplete="sei" data-mask="0000/000000/0000" maxlength="16" autofocus>
 
                                     @error('sei')
                                     <span class="invalid-feedback" role="alert">
@@ -71,7 +71,7 @@
 
 
                                 <div class="col-md-6">
-                                    <input id="report" type="hidden" name="report" value="0"autofocus>
+                                    <input id="report" type="hidden" name="report" value="EM ANALISE"autofocus>
 {{--                                    <select id="report" type="number" class="form-control @error('report') is-invalid @enderror" name="report" required autofocus>--}}
 {{--                                        <option value="0">Em Análise</option>--}}
 {{--                                        <option value="1">Deferido</option>--}}
@@ -171,3 +171,10 @@
     </div>
 
 @endsection
+
+@push('js')
+    <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
+    <script>
+        //
+    </script>
+@endpush
