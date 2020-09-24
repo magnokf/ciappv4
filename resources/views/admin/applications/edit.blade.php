@@ -45,24 +45,14 @@
                                 <input type="hidden" name="sei" value="{{$application->sei}}">
                                 <label for="report" class="col-md-4 col-form-label text-md-right">Atualizar a Situação da Análise do Documento:</label>
 
-
-{{--                                <div class="form-group form-check-inline col-md-6">--}}
-{{--                                    <input id="report" type="text" name="report" value="{{old('report') ?? $application->report}}"autofocus>--}}
-{{--                                                                        <select id="report" class="form-control">--}}
-{{--                                                                            <option value="0" {{ $application->report == '0' ? 'selected' : '' }}>Em Análise</option>--}}
-{{--                                                                            <option value="1" {{ $application->report == '1' ? 'selected' : '' }}>Deferido</option>--}}
-{{--                                                                            <option value="2" {{ $application->report == '2' ? 'selected' : '' }}>Indeferido</option>--}}
-{{--                                                                        </select>--}}
-{{--                                </div>--}}
                                 <div class="form-group form-check-inline col-md-6" >
                                     <input type="radio" style="margin: 5px"
                                            name="report" class="form-check-input" value="EM ANALISE"  {{ $application->report == 'EM ANALISE' ? 'checked' : '' }}><b style="color: blue">EM ANALISE</b>
                                     <input type="radio" style="margin: 5px"
                                            name="report" class="form-check-input" value="DEFERIDO"  {{$application->report == 'DEFERIDO' ? 'checked' : '' }}><b style="color: green">DEFERIDO</b>
-
-
                                     <input type="radio" style="margin: 5px"
-                                           name="report" class="form-check-input" value="INDEFERIDO" {{$application->report == 'INDEFERIDO' ? 'checked' : ''}}><b style="color: red">INDEFERIDO</b>  </div>
+                                           name="report" class="form-check-input" value="INDEFERIDO" {{$application->report == 'INDEFERIDO' ? 'checked' : ''}}><b style="color: red">INDEFERIDO</b>
+                                </div>
                             </div>
                             @if($application->report == 'INDEFERIDO')
 
@@ -129,6 +119,18 @@
                                         @enderror
                                     </div>
 
+                                </div>
+
+                                <div class="form-group row">
+                                    <input type="file" name="upload1">
+                                    <input type="file" name="upload2">
+                                    <input type="file" name="upload3">
+                                </div>
+
+                                <div>
+                                    <img src="{{ url('imagem/') . $application->doc1  }}" alt="">
+                                    <img src="{{ url('imagem/') . $application->doc2  }}" alt="">
+                                    <img src="{{ url('imagem/') . $application->doc3  }}" alt="">
                                 </div>
 
                             @endif

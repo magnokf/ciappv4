@@ -42,14 +42,13 @@ class ApplicationController extends Controller
     {
         $users = Auth::user();
         $applications = Application::orderBy('person_id', 'asc')->paginate(5);
-        foreach ($applications as $application){
-            $person = Person::where('rg',$application->person_id)->first() ;
-        }
+
+
 
         return view('admin.applications.index', [
 
             'applications'=>$applications,
-            'person'=>$person,
+
             'users'=>$users,
         ]);
     }
@@ -64,7 +63,6 @@ class ApplicationController extends Controller
         $id = base64_decode(request()->get('person'));
 
         $person = Person::findOrFail($id);
-        $applicant = $person->applications()->get();
         return view('admin.applications.create', compact('person','application'));
     }
 
@@ -76,6 +74,7 @@ class ApplicationController extends Controller
      */
     public function store(ApplicationRequest $request)
     {
+
         $createApplication = Application::create($request->all());
         $person_id = $request->get('person_id');
         $createApplication->save();
@@ -131,16 +130,9 @@ class ApplicationController extends Controller
      */
     public function update(ApplicationRequest $request, Application $application)
     {
-        $user = Auth::user();
-        //$application = Application::find($id);
+        Auth::user();
         $application->update($request->validated());
-        /*$application->report = $request->get('report');
-        $application->nota_def_cbmerj = $request->get('nota_def_cbmerj');
-        $application->nota_sigma_cbmerj = $request->get('nota_sigma_cbmerj');
-        $application->nota_craf_cbmerj = $request->get('nota_craf_cbmerj');*/
-
-        //$application->update($request->all());
-        flash("Solicitação atualizada com sucesso pelo Usuário:")->success();
+        flash("Solicitação atualizada com sucesso pelo Usuário:".Auth::user()->rg)->success();
         return redirect()->route('admin.applications.index');
     }
 
