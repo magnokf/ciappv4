@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">{{ __('Painel de Controle') }} - Gestão de Usuários
+                    <div class="card-header">{{ __('Painel de Controle') }}
                         @if(auth()->user()->admin == 1) -  <small style="color: red">Área do Adminstrador</small>@endif
                         @if(auth()->user()->client == 1) -  <small style="color: red">Área do Agente</small>@endif
 
@@ -58,9 +58,20 @@
                     <p>Portadores cadastrados no sistema</p>
                     @include('flash::message')
                 </div>
-                <div class="col-md-2" style="padding: 10px">
-                    <a href="{{route('admin.people.create')}}"><button class="btn btn-sm btn-success">Criar Novo Portador</button></a>
-                </div>
+                @if(is_null(auth()->user()->client))
+
+                    @else
+                    <div class="col-md-2" style="padding: 10px">
+                        <a href="{{route('admin.people.create')}}"><button class="btn btn-sm btn-success">Criar Novo Portador</button></a>
+                    </div>
+                @endif
+                @if(auth()->user()->admim == 1)
+                    <div class="col-md-2" style="padding: 10px">
+                        <a href="{{route('admin.people.create')}}"><button class="btn btn-sm btn-success">Criar Novo Portador</button></a>
+                    </div>
+                @else
+
+                @endif
             </div>
 
                 <div class="col-md-12">

@@ -2,10 +2,17 @@
     <div class="col-md-12">
         <button class="btn btn-group-sm">
             <a href="{{route('admin.users.index')}}"><button class="btn btn-primary">Usuários</button></a>
-            <a href="{{route('admin.users.team')}}"><button class="btn btn-success">Agentes</button></a>
+            @if(auth()->user()->admin == 1)
+                <a href="{{route('admin.users.team')}}"><button class="btn btn-success">Agentes</button></a>
+            @endif
+
+
             <a class="btn btn-secondary" href="{{route('admin.applications.index')}}">Solicitações</a>
             <button class="btn btn-primary">CRAF</button>
-            <a href="{{route('admin.people.index')}}"><button class="btn btn-warning">Portadores</button></a>
+            @if(auth()->user()->admin == 1)
+                <a href="{{route('admin.people.index')}}"><button class="btn btn-warning">Portadores</button></a>
+            @endif
+
         </button>
     </div>
 </div>
