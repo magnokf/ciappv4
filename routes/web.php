@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Person;
 use Symfony\Component\Console\Input\Input;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
