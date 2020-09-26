@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Craf-App</title>
+        <title>CiApp</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -81,7 +81,10 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    craf<b>App</b>
+                    ci<b>App</b>
+                </div>
+                <div class="colmd-6">
+                    <p>Corregedoria Interna - CBMERJ</p>
                 </div>
 
                 <div class="links">
