@@ -84,7 +84,9 @@
                             <th>Serial CIAPP</th>
                             <th>NºSEI</th>
                             <th>RG</th>
+                            <th>SITUAÇÃO ATUAL</th>
                             <th>CRAF</th>
+                            <th>ÚLTIMA ATUALIZAÇÃO</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -95,7 +97,9 @@
                                 <td>CIAPP {{$application->ident_key}}/{{$application->ident_ano}} </td>
                                 <td>SEI-27{{$application->sei}} </td>
                                 <td>{{$application->person_id}}</td>
+                                <td>{{$application->report}}</td>
                                 <td>{{$application->craf}}</td>
+                                <td>{{$application->updated_at}}</td>
 
                                 <td>
 

@@ -30,7 +30,7 @@
                     </div>
                 @endif
                 <div class="card">
-                    <div class="card-header">{{ __('Register') }} Atualizar Solicitação Nº{{$application->ident_key}}/{{$application->ident_ano}} - CRAF ( {{$person->fullName()}} {{$person->cpf}} )</div>
+                    <div class="card-header">{{ __('Register') }} a Atualização da Solicitação Nº{{$application->ident_key}}/{{$application->ident_ano}} - CRAF ( {{$person->fullName()}} {{$person->cpf}} )</div>
                         @if($application->report == 'EM ANALISE')<b class="btn btn-outline-primary" style="color:  blue">{{$application->report}}</b>@endif
                         @if($application->report == 'DEFERIDO')<b class="btn btn-outline-success" style="color:  forestgreen">{{$application->report}}</b>@endif
                         @if($application->report == 'INDEFERIDO')<b class="btn btn-outline-danger" style="color:  red">{{$application->report}}</b>@endif
@@ -46,12 +46,9 @@
                                 <label for="report" class="col-md-4 col-form-label text-md-right">Atualizar a Situação da Análise do Documento:</label>
 
                                 <div class="form-group form-check-inline col-md-6" >
-                                    <input type="radio" style="margin: 5px"
-                                           name="report" class="form-check-input" value="EM ANALISE"  {{ $application->report == 'EM ANALISE' ? 'checked' : '' }}><b style="color: blue">EM ANALISE</b>
-                                    <input type="radio" style="margin: 5px"
-                                           name="report" class="form-check-input" value="DEFERIDO"  {{$application->report == 'DEFERIDO' ? 'checked' : '' }}><b style="color: green">DEFERIDO</b>
-                                    <input type="radio" style="margin: 5px"
-                                           name="report" class="form-check-input" value="INDEFERIDO" {{$application->report == 'INDEFERIDO' ? 'checked' : ''}}><b style="color: red">INDEFERIDO</b>
+                                    <input type="radio" style="margin: 5px" name="report" class="form-check-input" value="EM ANALISE"{{ $application->report == 'EM ANALISE' ? 'checked' : '' }}><b style="color: blue">EM ANALISE</b>
+                                    <input type="radio" style="margin: 5px" name="report" class="form-check-input" value="DEFERIDO"{{$application->report == 'DEFERIDO' ? 'checked' : '' }}><b style="color: green">DEFERIDO</b>
+                                    <input type="radio" style="margin: 5px" name="report" class="form-check-input" value="INDEFERIDO"{{$application->report == 'INDEFERIDO' ? 'checked' : ''}}><b style="color: red">INDEFERIDO</b>
                                 </div>
                             </div>
                             @if($application->report == 'INDEFERIDO')
@@ -122,10 +119,31 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <input type="file" name="upload1">
-                                    <input type="file" name="upload2">
-                                    <input type="file" name="upload3">
+                                    <label for="nf" class="col-md-4 col-form-label text-md-right">Nota Fiscal</label>
+                                    <div class="col-md-6">
+
+                                        <input type="file" name="nf" class="form-control-file @error('nf') is-invalid @enderror">
+                                    </div>
+
                                 </div>
+                                <div class="form-group row">
+                                    <label for="gru" class="col-md-4 col-form-label text-md-right">G.R.U</label>
+                                    <div class="col-md-6">
+
+                                        <input type="file" name="gru" class="form-control-file @error('gru') is-invalid @enderror">
+                                    </div>
+
+                                </div>
+                                <div class="form-group row">
+                                    <label for="anexo_c" class="col-md-4 col-form-label text-md-right">Anexo C</label>
+                                    <div class="col-md-6">
+
+                                        <input type="file" name="anexo_c" class="form-control-file @error('anexo_c') is-invalid @enderror">
+                                    </div>
+
+                                </div>
+
+
 
                                 <div>
                                     <img src="{{ url('imagem/') . $application->doc1  }}" alt="">

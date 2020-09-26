@@ -29,7 +29,7 @@ class StorePerson extends FormRequest
             'last_name' => ['required', 'string', 'max:191'],
             'email' => "required|string|email|max:191|unique:people",
             'rg'=> ['required','digits_between:6,8','unique:people'],
-            'cpf'=> ['required','unique:people'],
+            'cpf'=> 'required|cpf|unique:people',
             'phone'=> ['required','unique:people','min:15'],
         ];
         return $this->rules;

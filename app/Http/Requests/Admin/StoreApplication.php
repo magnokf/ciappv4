@@ -53,6 +53,7 @@ class StoreApplication extends FormRequest
     ];
         if ($this->method() === 'PUT'){
             $this->rules['nota_def_cbmerj'] = 'required|string|max:20|min:5';
+            $this->rules['report'] = 'required';
         }
 
 

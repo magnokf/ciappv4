@@ -9,9 +9,7 @@
         Protocolo CIAPP:  <strong>{{$application->ident_key}} / {{$application->ident_ano}}</strong><br>
         Requerimento SEI Nº:  <strong>SEI-27{{$application->sei}}</strong><br>
 
-        @if($application->report == 'EM ANALISE')Status:<b style="color:  blue">{{$application->report}}</b>@endif
-        @if($application->report == 'DEFERIDO')Status:<b style="color:  forestgreen">{{$application->report}}</b>@endif
-        @if($application->report == 'INDEFERIDO')Status:<b style="color:  red">{{$application->report}}</b>@endif
+        Status: {{$application->report}}
                                                                                        <br>
         @if(!$application->nota_def_cbmerj)
 
