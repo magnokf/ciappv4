@@ -24,9 +24,9 @@ class CreateApplicationsTable extends Migration
             $table->string('nota_def_cbmerj')->nullable();
             $table->string('nota_sigma_cbmerj')->nullable();
             $table->string('nota_craf_cbmerj')->nullable();
-            $table->string('doc1')->nullable();
-            $table->string('doc2')->nullable();
-            $table->string('doc3')->nullable();
+            $table->string('nf')->nullable();
+            $table->string('gru')->nullable();
+            $table->string('anexo_c')->nullable();
             $table->string('craf')->nullable();
             $table->integer('closed')->default(0);
             $table->timestamps();

@@ -59,7 +59,7 @@
 
                 </div>
                 <div class="col-md-2" style="padding: 10px">
-                    @if(auth()->user()->admin == 1) - <a href="{{route('admin.users.create')}}"><button class="btn btn-success">Criar Novo Usuário</button></a> @endif
+                    @if(auth()->user()->admin == 1)<a href="{{route('admin.users.create')}}"><button class="btn btn-success">Criar Novo Usuário</button></a> @endif
 
                 </div>
             </div>
