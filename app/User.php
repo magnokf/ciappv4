@@ -49,6 +49,7 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->attributes['client'] = ($value === true || $value === '1' ? 1 : 0);
     }
 
+
     public function getLastLoginAtAttribute($value)
     {
         return $value ? date("d/m/Y H:i:s", strtotime($value)): 'N/A';

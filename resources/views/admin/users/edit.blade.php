@@ -12,10 +12,16 @@
                 @method('PUT')
                 @csrf
                 <input type="hidden" name="id" value="{{ $user->id }}">
+
                 <div class="form-group">
 
                     <label for="name">Nome:</label>
                     <input type="text" class="form-control" name="name" value="{{ old('name') ?? $user->name }}" @if($user->admin != 1) readonly @endif />
+                </div>
+                <div class="form-group">
+
+                    <label for="cpf">CPF:</label>
+                    <input type="text" class="form-control" name="cpf" value="{{ old('cpf') ?? $user->cpf }}" @if($user->admin != 1) readonly @endif />
                 </div>
 
 
