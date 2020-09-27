@@ -66,6 +66,7 @@
                 </div>
                 @endif
                 <button type="submit" class="btn btn-primary">Atualizar dados</button>
+                <a href="{{route('admin.users.index')}}" class="btn btn-secondary">Voltar</a>
             </form>
         </div>
     </div>

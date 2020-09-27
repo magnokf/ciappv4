@@ -46,10 +46,15 @@ class UserController extends Controller
     {
         if (auth()->user()->admin == 1){
             $users = $this->User->all();
-
             return view('admin.users.index')->with('users', $users);
         }
+        if (!auth()->user()->client){
+            Auth::logout();
+            flash('Usuário precisa ter o e-mail verificado, e autorização do comando para utilizar o ciApp, tente mais tarde.');
+            return redirect()->route('login');
+        }
         $users = User::where('id', auth()->id())->get();
+
         return view('admin.users.index')->with('users', $users);
 
 
@@ -63,6 +68,7 @@ class UserController extends Controller
      */
     public function create()
     {
+
         return view('admin.users.create');
     }
 
@@ -79,6 +85,7 @@ class UserController extends Controller
             'name' => $request->get('name'),
             'email' => $request->get('email'),
             'rg' => $request->get('rg'),
+            'cpf' => $request->get('cpf'),
             'password'=>Hash::make($request->get('password')),
 
         ]);
@@ -112,6 +119,11 @@ class UserController extends Controller
     {
 
         $user=$this->User->find($id);
+        if (!$user->client){
+            Auth::logout();
+            flash('Usuário precisa ter o e-mail verificado, e autorização do comando para utilizar o ciApp, tente mais tarde.');
+            return redirect()->route('login');
+        }
 
         return view('admin.users.show', compact('user'));
     }
@@ -125,14 +137,12 @@ class UserController extends Controller
     public function edit($id)
     {
 
-//        if(auth('web')->user()->id != $id)
-//        {
-//            session()->flash('error', 'proibido editar outro usuário!');
-//            return redirect()->route('admin.users.index');
-//
-//        }
-
         $user = User::where('id', $id)->first();
+        if (!$user->client){
+            Auth::logout();
+            flash('Usuário precisa ter o e-mail verificado, e autorização do comando para utilizar o ciApp, tente mais tarde.');
+            return redirect()->route('login');
+        }
         return view('admin.users.edit', [
             'user' => $user
         ]);

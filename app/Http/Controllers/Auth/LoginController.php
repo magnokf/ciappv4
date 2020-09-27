@@ -45,14 +45,17 @@ class LoginController extends Controller
 
     public function authenticated(Request $request, $user)
     {
+        if (!$user->client){
+            Auth::logout();
+            flash('Usuário precisa de autorização do comando para utilizar o ciApp, tente mais tarde.');
+            return redirect()->route('login');
+        }
         Auth::logoutOtherDevices($request->get('password'));
 
-        $user->timestamps = false;
-        $user->last_login_at = Carbon::now()->toDateTimeString();
-        $user->last_login_ip = $request->getClientIp();
-        $user->save();
-
-
+            $user->timestamps = false;
+            $user->last_login_at = Carbon::now()->toDateTimeString();
+            $user->last_login_ip = $request->getClientIp();
+            $user->save();
     }
 
     public function username()

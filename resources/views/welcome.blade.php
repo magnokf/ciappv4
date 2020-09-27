@@ -83,7 +83,7 @@
                 <div class="title m-b-md">
                     ci<b>App</b>
                 </div>
-                <div class="colmd-6">
+                <div class="col-md-6">
                     <p>Corregedoria Interna - CBMERJ</p>
                 </div>
 

@@ -47,6 +47,19 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="cpf" class="col-md-4 col-form-label text-md-right">CPF</label>
+
+                                <div class="col-md-6">
+                                    <input id="cpf" type="text" class="form-control @error('cpf') is-invalid @enderror" name="cpf" value="{{ old('cpf') }}" required autocomplete="cpf" autofocus>
+
+                                    @error('rg')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
 
                             <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
@@ -112,3 +125,7 @@
         </div>
     </div>
 @endsection
+@push('js')
+    <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
+
+@endpush

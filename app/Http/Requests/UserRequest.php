@@ -29,18 +29,21 @@ class UserRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'email' => "required|string|email|max:255|unique:users",
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'rg'=> "required|string|min:5|max:8|unique:users"
+            'rg'=> "required|string|min:5|max:8|unique:users",
+            'cpf'=> "required|cpf|unique:users",
         ];
 
         if ($this->method() === 'PUT'){
             $this->rules['email'] .= ",email,{$this->id},id";
             $this->rules['rg'] .= ",rg,{$this->id},id";
+            $this->rules['cpf'] .= ",cpf,{$this->id},id";
             $this->rules['password'] = '';
         }
         if ($this->method() === 'DELETE'){
             $this->rules['name'] = '';
             $this->rules['email'] = '';
             $this->rules['rg'] = '';
+            $this->rules['cpf'] = '';
             $this->rules['password'] = '';
         }
 

@@ -41,10 +41,12 @@ class ApplicationController extends Controller
     public function index(Application $applications)
     {
         $users = Auth::user();
+        if (!auth()->user()->client){
+            Auth::logout();
+            flash('Usuário precisa ter o e-mail verificado, e autorização do comando para utilizar o ciApp, tente mais tarde.');
+            return redirect()->route('login');
+        }
         $applications = Application::orderBy('person_id', 'asc')->paginate(5);
-
-
-
         return view('admin.applications.index', [
 
             'applications'=>$applications,
