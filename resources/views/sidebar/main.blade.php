@@ -12,6 +12,9 @@
             @if(auth()->user()->admin == 1)
                 <a href="{{route('admin.people.index')}}"><button class="btn btn-warning">Portadores</button></a>
             @endif
+            @if(auth()->user()->client == 1)
+                <a href="{{route('admin.people.index')}}"><button class="btn btn-warning">Portadores</button></a>
+            @endif
 
         </button>
     </div>
