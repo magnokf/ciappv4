@@ -138,7 +138,7 @@ class UserController extends Controller
     {
 
         $user = User::where('id', $id)->first();
-        if (!$user->client){
+        if (!auth()->user()->client){
             Auth::logout();
             flash('Usuário precisa ter o e-mail verificado, e autorização do comando para utilizar o ciApp, tente mais tarde.');
             return redirect()->route('login');
