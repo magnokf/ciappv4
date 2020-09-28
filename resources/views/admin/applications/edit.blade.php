@@ -38,8 +38,9 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('admin.applications.update', [$application->id]) }}" enctype="multipart/form-data">
                             <input type="hidden" name="id" value="{{$application->id}}">
-                            @method('PUT')
                             @csrf
+                            @method('PUT')
+
                             @include('flash::message')
                             <div class="form-group row">
                                 <input type="hidden" name="sei" value="{{$application->sei}}">
@@ -121,24 +122,21 @@
                                 <div class="form-group row">
                                     <label for="nf" class="col-md-4 col-form-label text-md-right">Nota Fiscal</label>
                                     <div class="col-md-6">
-
-                                        <input type="file" name="nf" class="form-control-file @error('nf') is-invalid @enderror">
+                                        <input type="file" name="nf" class="form-control-file @error('nf') is-invalid @enderror" value="{{$application->nf}}">
                                     </div>
 
                                 </div>
                                 <div class="form-group row">
                                     <label for="gru" class="col-md-4 col-form-label text-md-right">G.R.U</label>
                                     <div class="col-md-6">
-
-                                        <input type="file" name="gru" class="form-control-file @error('gru') is-invalid @enderror">
+                                        <input type="file" name="gru" class="form-control-file @error('gru') is-invalid @enderror" value="{{$application->gru}}">
                                     </div>
 
                                 </div>
                                 <div class="form-group row">
                                     <label for="anexo_c" class="col-md-4 col-form-label text-md-right">Anexo C</label>
                                     <div class="col-md-6">
-
-                                        <input type="file" name="anexo_c" class="form-control-file @error('anexo_c') is-invalid @enderror">
+                                        <input type="file" name="anexo_c" class="form-control-file @error('anexo_c') is-invalid @enderror" value="{{$application->anexo_c}}">
                                     </div>
 
                                 </div>

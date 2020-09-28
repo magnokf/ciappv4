@@ -42,21 +42,5 @@ class Application extends Model
         return Carbon::parse($value)->format('d-m-Y H:i:s');
     }
 
-    public function getReportAttribute($value)
-    {
-        if ($value == 'DEFERIDO'){
-            echo '<strong><b style="color: green">DEFERIDO</b></strong> ';
-        }
-        if ($value == 'INDEFERIDO'){
-            echo '<strong><b style="color: red">INDEFERIDO</b></strong> ';
-        }
-        if ($value == 'EM ANALISE'){
-            echo '<strong><b style="color: blue">EM ANÁLISE</b></strong> ';
-        }
-    }
-
-
-
-
 
 }

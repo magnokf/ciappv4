@@ -9,8 +9,8 @@
         Protocolo CIAPP:  <strong>{{$application->ident_key}} / {{$application->ident_ano}}</strong><br>
         Requerimento SEI Nº:  <strong>SEI-27{{$application->sei}}</strong><br>
 
-        Status: {{$application->report}}
-                                                                                       <br>
+        Status: <b>{{$application->report}}</b>
+                                                                                      <br>
         @if(!$application->nota_def_cbmerj)
 
         @else Nota de Deferimento/Indeferimento :<b>{{$application->nota_def_cbmerj}}</b><br>

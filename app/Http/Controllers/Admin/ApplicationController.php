@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Person;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Symfony\Component\Console\Input\Input;
 
 
@@ -21,10 +22,10 @@ class ApplicationController extends Controller
      * @var Application
      */
     private $Application;
+
     /**
      * @var
      */
-
 
 
     public function __construct()
@@ -41,7 +42,7 @@ class ApplicationController extends Controller
     public function index(Application $applications)
     {
         $users = Auth::user();
-        if (!auth()->user()->client){
+        if (!auth()->user()->client) {
             Auth::logout();
             flash('Usuário precisa ter o e-mail verificado, e autorização do comando para utilizar o ciApp, tente mais tarde.');
             return redirect()->route('login');
@@ -49,9 +50,9 @@ class ApplicationController extends Controller
         $applications = Application::orderBy('person_id', 'asc')->paginate(5);
         return view('admin.applications.index', [
 
-            'applications'=>$applications,
+            'applications' => $applications,
 
-            'users'=>$users,
+            'users' => $users,
         ]);
     }
 
@@ -65,31 +66,31 @@ class ApplicationController extends Controller
         $id = base64_decode(request()->get('person'));
 
         $person = Person::findOrFail($id);
-        return view('admin.applications.create', compact('person','application'));
+        return view('admin.applications.create', compact('person', 'application'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(ApplicationRequest $request)
     {
+
 
         $createApplication = Application::create($request->all());
         $person_id = $request->get('person_id');
         $createApplication->save();
 
         flash("Solicitação criada com sucesso")->success();
-        $person = Person::firstWhere('rg',$person_id);
+        $person = Person::firstWhere('rg', $person_id);
         $applications = Application::where('person_id', $person_id)->paginate(5);
 
 
-
-        return redirect()->route('admin.applications.index',[
-            'person'=>$person,
-            'applications'=>$applications
+        return redirect()->route('admin.applications.index', [
+            'person' => $person,
+            'applications' => $applications
         ]);
 
     }
@@ -97,14 +98,14 @@ class ApplicationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Application  $application
+     * @param \App\Application $application
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
 
         $application = Application::find($id);
-        $person = Person::where('rg',$application->person_id)->first() ;
+        $person = Person::where('rg', $application->person_id)->first();
 
         return view('admin.applications.show_app', compact('application', 'person'));
 
@@ -114,40 +115,84 @@ class ApplicationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Application  $application
+     * @param \App\Application $application
      * @return \Illuminate\Http\Response
      */
     public function edit(Application $application)
     {
-        $person = Person::where('rg',$application->person_id)->first() ;
+        $person = Person::where('rg', $application->person_id)->first();
         return view('admin.applications.edit', compact('application', 'person'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Application  $application
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Application $application
      * @return \Illuminate\Http\Response
      */
     public function update(ApplicationRequest $request, Application $application)
     {
         Auth::user();
+
+
         $application->update($request->validated());
-        flash("Solicitação atualizada com sucesso pelo Usuário:".Auth::user()->rg)->success();
+
+
+
+        $fileModel = new File;
+
+        if($request->file('nf')) {
+            $fileName = time().'_'.$request->file->getClientOriginalName();
+            $filePath = $request->file('nf')->storeAs('notafiscal', $fileName, 'public');
+
+            $fileModel->name = time().'_'.$request->file->getClientOriginalName();
+            $fileModel->file_path = '/storage/' . $filePath;
+            $fileModel->save();
+
+            return back()
+                ->with('success','nota fiscal uploaded.')
+                ->with('file', $fileName);
+        }
+
+        if($request->file('gru')) {
+            $fileName = time().'_'.$request->file->getClientOriginalName();
+            $filePath = $request->file('gru')->storeAs('gru', $fileName, 'public');
+
+            $fileModel->name = time().'_'.$request->file->getClientOriginalName();
+            $fileModel->file_path = '/storage/' . $filePath;
+            $fileModel->save();
+
+            return back()
+                ->with('success','gru uploaded.')
+                ->with('file', $fileName);
+        }
+        if($request->file('anexo_c')) {
+            $fileName = time().'_'.$request->file->getClientOriginalName();
+            $filePath = $request->file('anexo_c')->storeAs('anexoc', $fileName, 'public');
+
+            $fileModel->name = time().'_'.$request->file->getClientOriginalName();
+            $fileModel->file_path = '/storage/' . $filePath;
+            $fileModel->save();
+
+            return back()
+                ->with('success','Anexo C uploaded.')
+                ->with('file', $fileName);
+        }
+
+        flash("Solicitação atualizada com sucesso pelo Usuário:" . Auth::user()->rg)->success();
         return redirect()->route('admin.applications.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Application  $application
+     * @param \App\Application $application
      * @return \Illuminate\Http\Response
      */
     public function destroy(Application $application)
     {
         //
     }
-
 
 }

@@ -9,12 +9,10 @@
 
             <a class="btn btn-secondary" href="{{route('admin.applications.index')}}">Solicitações</a>
             <button class="btn btn-primary">CRAF</button>
-            @if(auth()->user()->admin == 1)
+            @if(auth()->user()->admin == 1 | auth()->user()->client == 1)
                 <a href="{{route('admin.people.index')}}"><button class="btn btn-warning">Portadores</button></a>
             @endif
-            @if(auth()->user()->client == 1)
-                <a href="{{route('admin.people.index')}}"><button class="btn btn-warning">Portadores</button></a>
-            @endif
+
 
         </button>
     </div>

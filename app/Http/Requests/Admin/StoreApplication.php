@@ -17,23 +17,7 @@ class StoreApplication extends FormRequest
         return Auth::check();
     }
 
-    protected function prepareForValidation()
-    {
-        if ($this->hasFile('upload1')){
 
-            $this->merge(['doc1', '/imagem/nome.pdf']);
-        }
-
-        if ($this->hasFile('upload2')){
-
-            $this->merge(['doc2', '/imagem/nome.pdf']);
-        }
-
-        if ($this->hasFile('upload3')){
-
-            $this->merge(['doc3', '/imagem/nome.pdf']);
-        }
-    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -47,12 +31,14 @@ class StoreApplication extends FormRequest
             //'sei' => ['required', 'min:16', 'max:16' ,"unique:applications,NULL,$this->id,id"],
             'sei' => "required|min:16|max:16|unique:applications,NULL,$this->id,id",
             'craf'=> ['nullable', 'digits:11', 'unique:applications'],
-            'doc1' => 'nullable',
-            'doc2' => 'nullable',
-            'doc3' => 'nullable',
+            'nf' => 'nullable|mimes:jpeg,pdf,png,jpg|max:2048',
+            'gru' => 'nullable|mimes:jpeg,pdf,png,jpg|max:2048',
+            'anexo_c' => 'nullable|mines:jpeg,pdf,png,jpg|max:2048'
     ];
         if ($this->method() === 'PUT'){
             $this->rules['nota_def_cbmerj'] = 'required|string|max:20|min:5';
+            $this->rules['nota_sigma_cbmerj'] = 'nullable|string|max:20|min:5';
+            $this->rules['nota_craf_cbmerj'] = 'nullable|string|max:20|min:5';
             $this->rules['report'] = 'required';
         }
 
