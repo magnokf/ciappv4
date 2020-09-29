@@ -8,6 +8,7 @@
 
            @include('alerts.messages')
 
+
             <form method="post" action="{{ route('admin.users.update', ['user' => $user->id]) }}">
                 @method('PUT')
                 @csrf

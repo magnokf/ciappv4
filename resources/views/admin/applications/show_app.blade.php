@@ -27,23 +27,23 @@
 
         @endif
 
-        @if(!$application->doc1)
+        @if(!$application->nf)
 
-        @else <a href="" class="btn btn-outline-danger btn-sm btn-warning"><b>Nota Fiscal :</b><b>Arquivo</b><br></a>
-
-
-        @endif
-
-        @if(!$application->doc2)
-
-        @else <a href="" class="btn btn-outline-danger btn-sm btn-warning"><b>GRU :</b><b>Arquivo</b><br></a>
+        @else <a href="{{ url("storage/$application->nf") }}" target="_blank" class="btn btn-outline-danger btn-sm btn-warning"><b>Nota Fiscal :</b><b>Arquivo</b><br></a>
 
 
         @endif
 
-        @if(!$application->doc3)
+        @if(!$application->gru)
 
-        @else <a href="" class="btn btn-outline-danger btn-sm btn-warning"><b>Anexo C :</b><b>Arquivo</b><br></a>
+        @else <a href="{{ url("storage/$application->gru") }}" target="_blank" class="btn btn-outline-danger btn-sm btn-warning"><b>GRU :</b><b>Arquivo</b><br></a>
+
+
+        @endif
+
+        @if(!$application->anexo_c)
+
+        @else <a href="{{ url("storage/$application->anexo_c") }}" target="_blank" class="btn btn-outline-danger btn-sm btn-warning"><b>Anexo C :</b><b>Arquivo</b><br></a>
 
 
         @endif
@@ -51,7 +51,7 @@
 
         @if(!$application->craf)
 
-        @else <a href="" class="btn btn-outline-danger btn-sm btn-warning"><b>Registro CRAF :</b><b>{{$application->craf}}</b><br></a>
+        @else <a href="" class="btn btn-outline-danger btn-sm btn-warning" target="_blank"><b>Registro CRAF :</b><b>{{$application->craf}}</b><br></a>
 
 
         @endif

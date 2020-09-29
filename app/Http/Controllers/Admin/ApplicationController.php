@@ -133,52 +133,26 @@ class ApplicationController extends Controller
      */
     public function update(ApplicationRequest $request, Application $application)
     {
+
         Auth::user();
 
+        if($request->hasFile('nf')) {
+            $file_name = $application->id . '_' . $application->person_id . '_' . $request->nf->getClientOriginalName();
+            $upload = $request->nf->storeAs('notafiscal', $file_name);
+            $application->nf = $upload;
+        }
+        if($request->hasFile('gru')) {
+            $file_name = $application->id . '_' . $application->person_id . '_' . $request->gru->getClientOriginalName();
+            $upload = $request->gru->storeAs('gru', $file_name);
+            $application->gru = $upload;
+        }
+        if($request->hasFile('anexo_c')) {
+            $file_name = $application->id . '_' . $application->person_id . '_' . $request->anexo_c->getClientOriginalName();
+            $upload = $request->anexo_c->storeAs('anexo_c', $file_name);
+            $application->anexo_c = $upload;
+        }
 
         $application->update($request->validated());
-
-
-
-        $fileModel = new File;
-
-        if($request->file('nf')) {
-            $fileName = time().'_'.$request->file->getClientOriginalName();
-            $filePath = $request->file('nf')->storeAs('notafiscal', $fileName, 'public');
-
-            $fileModel->name = time().'_'.$request->file->getClientOriginalName();
-            $fileModel->file_path = '/storage/' . $filePath;
-            $fileModel->save();
-
-            return back()
-                ->with('success','nota fiscal uploaded.')
-                ->with('file', $fileName);
-        }
-
-        if($request->file('gru')) {
-            $fileName = time().'_'.$request->file->getClientOriginalName();
-            $filePath = $request->file('gru')->storeAs('gru', $fileName, 'public');
-
-            $fileModel->name = time().'_'.$request->file->getClientOriginalName();
-            $fileModel->file_path = '/storage/' . $filePath;
-            $fileModel->save();
-
-            return back()
-                ->with('success','gru uploaded.')
-                ->with('file', $fileName);
-        }
-        if($request->file('anexo_c')) {
-            $fileName = time().'_'.$request->file->getClientOriginalName();
-            $filePath = $request->file('anexo_c')->storeAs('anexoc', $fileName, 'public');
-
-            $fileModel->name = time().'_'.$request->file->getClientOriginalName();
-            $fileModel->file_path = '/storage/' . $filePath;
-            $fileModel->save();
-
-            return back()
-                ->with('success','Anexo C uploaded.')
-                ->with('file', $fileName);
-        }
 
         flash("Solicitação atualizada com sucesso pelo Usuário:" . Auth::user()->rg)->success();
         return redirect()->route('admin.applications.index');
