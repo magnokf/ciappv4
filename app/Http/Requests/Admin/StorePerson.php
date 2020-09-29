@@ -28,7 +28,7 @@ class StorePerson extends FormRequest
             'first_name' => ['required', 'string', 'max:191'],
             'last_name' => ['required', 'string', 'max:191'],
             'email' => "required|string|email|max:191|unique:people",
-            'rg'=> ['required','digits_between:6,8','unique:people'],
+            'rg'=> ['required','digits_between:6,9','unique:people'],
             'cpf'=> 'required|cpf|unique:people',
             'phone'=> ['required','unique:people','min:15'],
         ];

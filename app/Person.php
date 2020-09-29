@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use OwenIt\Auditing\Contracts\Audit;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Person extends Model
+class Person extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
     protected $guarded = ['id'];
 
     protected $fillable = [
@@ -47,4 +51,6 @@ class Person extends Model
     {
         return $this->hasMany(Application::class, 'person_id', 'id');
     }
+
+
 }

@@ -17,6 +17,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.1",
         "laravellegends/pt-br-validator": "^7.0",
+        "owen-it/laravel-auditing": "^11.0",
         "spatie/laravel-activitylog": "^3.16"
     },
     "require-dev": {
