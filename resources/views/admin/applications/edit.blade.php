@@ -183,15 +183,15 @@
                                     <div class="col-md-6">
                                         @if(!empty($application->nf))
 
-                                            <a href="{{ url("storage/$application->nf") }}" class="btn btn-danger">Nota Fiscal {{$application->sei}}</a>
+                                            <a href="{{ url("storage/$application->nf") }}" target="_blank" class="btn btn-danger">Nota Fiscal {{$application->sei}}</a>
                                         @endif
                                             @if(!empty($application->gru))
 
-                                                <a href="{{ url("storage/$application->gru") }}" class="btn btn-warning">GRU {{$application->sei}}</a>
+                                                <a href="{{ url("storage/$application->gru") }}" target="_blank" class="btn btn-warning">GRU {{$application->sei}}</a>
                                             @endif
                                             @if(!empty($application->anexo_c))
 
-                                                <a href="{{ url("storage/$application->anexo_c") }}" class="btn btn-success">Anexo C {{$application->sei}}</a>
+                                                <a href="{{ url("storage/$application->anexo_c") }}" target="_blank" class="btn btn-success">Anexo C {{$application->sei}}</a>
                                             @endif
                                     </div>
                                 </div>

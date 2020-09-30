@@ -86,6 +86,8 @@ class UserController extends Controller
             'email' => $request->get('email'),
             'rg' => $request->get('rg'),
             'cpf' => $request->get('cpf'),
+            'admin' => $request->get('admin'),
+            'client' => $request->get('client'),
             'password'=>Hash::make($request->get('password')),
 
         ]);

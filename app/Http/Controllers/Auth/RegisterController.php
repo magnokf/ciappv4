@@ -73,6 +73,7 @@ class RegisterController extends Controller
             'rg'=> $data['rg'],
             'cpf'=> $data['cpf'],
 
+
         ]);
     }
 }
