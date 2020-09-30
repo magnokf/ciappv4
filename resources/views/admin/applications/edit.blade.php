@@ -157,6 +157,11 @@
                                         <input type="file" name="nf"
                                                class="form-control-file @error('nf') is-invalid @enderror"
                                                value="{{$application->nf}}">
+                                        @error('nf')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror
                                     </div>
 
                                 </div>
@@ -166,6 +171,11 @@
                                         <input type="file" name="gru"
                                                class="form-control-file @error('gru') is-invalid @enderror"
                                                value="{{$application->gru}}">
+                                        @error('gru')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror
                                     </div>
 
                                 </div>
@@ -175,6 +185,11 @@
                                         <input type="file" name="anexo_c"
                                                class="form-control-file @error('anexo_c') is-invalid @enderror"
                                                value="{{$application->anexo_c}}">
+                                        @error('anexo_c')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror
                                     </div>
 
                                 </div>

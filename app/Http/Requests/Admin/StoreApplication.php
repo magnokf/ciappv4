@@ -78,7 +78,10 @@ class StoreApplication extends FormRequest
     public function attributes()
     {
         return[
-            'nota_def_cbmerj'=>'Nota do Deferido / Indeferido'
+            'nota_def_cbmerj'=>'Nota do Deferido / Indeferido',
+            'nf'=>'Nota Fiscal',
+            'gru'=>'GRU',
+            'anexo_c'=>'ANEXO C',
 
         ];
 
