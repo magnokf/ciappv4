@@ -64,7 +64,15 @@
 
             <div class="col-md-12">
 
+                <a class="btn btn-sm btn-warning" href="{{route('admin.applications.index')}}">Listar todas solicitações</a>
+                <form action="applications/search" method="get">
+                    {{ csrf_field() }}
+                    <div class="btn btn-sm btn-info">
+                        <label for="gsearch">Filtar pelo RG:</label>
+                        <input  id= "gsearch" name="search_text" type="text" type="submit"/>
+                    </div>
 
+                </form>
 
 
             </div>

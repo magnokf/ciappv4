@@ -34,6 +34,13 @@ class ApplicationController extends Controller
 
     }
 
+    public function search()
+    {
+        $query=request('search_text');
+        $applications = Application::where('person_id', 'LIKE', '%' . $query . '%')->paginate(5);;
+        return view('admin.applications.index',compact('applications'));
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -136,25 +143,9 @@ class ApplicationController extends Controller
 
         Auth::user();
 
-        /*if($request->hasFile('nf')) {
-            $file_name = $application->id . '_' . $application->person_id . '_' . $request->nf->getClientOriginalName();
-            $upload = $request->nf->storeAs('notafiscal', $file_name);
-            $application->nf = $upload;
-        }
-        if($request->hasFile('gru')) {
-            $file_name = $application->id . '_' . $application->person_id . '_' . $request->gru->getClientOriginalName();
-            $upload = $request->gru->storeAs('gru', $file_name);
-            $application->gru = $upload;
-        }
-        if($request->hasFile('anexo_c')) {
-            $file_name = $application->id . '_' . $application->person_id . '_' . $request->anexo_c->getClientOriginalName();
-            $upload = $request->anexo_c->storeAs('anexo_c', $file_name);
-            $application->anexo_c = $upload;
-        }*/
-
         $application->update($request->validated());
 
-        flash("Solicitação atualizada com sucesso pelo Usuário:" . Auth::user()->rg)->success();
+        flash("Solicitação <b>$application->ident_key / $application->ident_ano</b>  atualizada com sucesso pelo Usuário:" . Auth::user()->rg)->success();
         return redirect()->route('admin.applications.index');
     }
 
