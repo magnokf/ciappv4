@@ -33,7 +33,7 @@ class StoreApplication extends FormRequest
             'craf'=> ['nullable', 'digits:11', 'unique:applications'],
             'nf' => 'nullable|mimes:jpeg,pdf,png,jpg|max:2048',
             'gru' => 'nullable|mimes:jpeg,pdf,png,jpg|max:2048',
-            'anexo_c' => 'nullable|mimes:jpeg,pdf,png,jpg|max:2048'
+            'anexo_c' => 'nullable|mimes:doc,docx,jpeg,pdf,png,jpg|max:2048'
     ];
         if ($this->method() === 'PUT'){
             $this->rules['nota_def_cbmerj'] = 'required|string|max:20|min:5';
