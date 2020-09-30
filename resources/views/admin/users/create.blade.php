@@ -51,7 +51,7 @@
                                 <label for="cpf" class="col-md-4 col-form-label text-md-right">CPF</label>
 
                                 <div class="col-md-6">
-                                    <input id="cpf" type="text" class="form-control @error('cpf') is-invalid @enderror" name="cpf" value="{{ old('cpf') }}" required autocomplete="cpf" autofocus>
+                                    <input id="cpf" type="text" class=" cpf form-control @error('cpf') is-invalid @enderror" name="cpf" value="{{ old('cpf') }}" required autocomplete="cpf" autofocus>
 
                                     @error('rg')
                                     <span class="invalid-feedback" role="alert">
@@ -88,6 +88,26 @@
                                     @enderror
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label for="admin">Admin:</label>
+
+                                <select class="browser-default custom-select" name="admin" id="admin">
+                                    <option value={{old('admin')}} selected>SELECIONE</option>
+                                    <option value="1"><b style="color: blue">ADM AUTORIZADO</b> </option>
+                                    <option value="0"><b style="color: red">DESATIVADO</b></option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="client">Agente:</label>
+
+                                <select class="browser-default custom-select" name="client" id="client">
+                                    <option value={{old('client')}}>SELECIONE</option>
+                                    <option value="1">AGENTE AUTORIZADO</option>
+                                    <option value="0">AGENTE NÃO AUTORIZADO</option>
+                                </select>
+                            </div>
+                            @endif
 
                             <div class="form-group row">
                                 <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
