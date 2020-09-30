@@ -28,8 +28,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-//        $person = Person::all();
-//        $applications = Application::all();
-//        view()->share('applications', $applications, 'person',$person);
+
     }
 }
