@@ -115,13 +115,17 @@
                                 <td>{{$person->rg}}</td>
                                 <td>{{$person->cpf}}</td>
 
-                                <td>
+                                <td style="width: 200px">
 
 
                                     <a href="{{route('admin.people.show', ['person' =>$person->id])}}"><button class="btn btn-sm btn-success">Visualizar Atividades</button></a>
                                     <a href="{{route('admin.applications.create', ['person' => base64_encode($person->id) ])}}"><button class="btn btn-sm btn-secondary">Abrir Solicitação de CRAF</button></a>
-                                    <a href=""><button class="btn btn-sm btn-warning">Editar</button></a>
-                                        <a href=""><button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Deseja Excluir definitivamente?');">Delete</button></a>
+                                    <a href="{{route('admin.people.edit', $person->id)}}"><button class="btn btn-sm btn-warning">Editar</button></a>
+                                    <form action="{{ route('admin.people.destroy', $person->id)}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Deseja Excluir definitivamente?');">Delete</button>
+                                    </form>
 
 
                                 </td>

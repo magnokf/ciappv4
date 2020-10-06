@@ -109,10 +109,10 @@ class PersonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Person $person)
     {
-        $person = Person::where('id',$id)->first();
-        return view('admin.people.edit',[
+
+        return view('admin.people.edit', [
             'person'=>$person
         ]);
     }
@@ -124,9 +124,12 @@ class PersonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PersonRequest $request, Person $person)
     {
-        //
+        $person->update($request->validated());
+        flash('Portador Atualizado!');
+        return redirect()->route('admin.people.index');
+
     }
 
     /**
@@ -137,7 +140,18 @@ class PersonController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(auth('web')->user()->admin != 1  ){
+            session()->flash('error', 'Ação Deletar é Proibida para Agentes! Somente Administradores.');
+            return redirect()->route('admin.people.index');
+        }
+//        Person::findOrFail($person)->delete();
+//        session()->flash('success', 'Portador foi excluido com sucesso!');
+//
+//        return redirect()->route('admin.people.index');
+        $person = Person::findOrFail($id);
+        $person->delete();
+        session()->flash('success', 'Portador foi excluido com sucesso!');
+        return redirect()->back();
     }
 
 
